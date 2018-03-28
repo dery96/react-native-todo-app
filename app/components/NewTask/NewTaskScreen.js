@@ -9,32 +9,37 @@ import {
 	Text,
 	Left,
 	Right,
-	Body
+	Body,
+	Content
 } from 'native-base';
 
+import NewTaskForm from './NewTaskForm';
 export default class NewTaskScreen extends Component {
+	static navigationOptions = {
+		header: null
+	};
 	render() {
 		return (
-			<Container>
+			<Container style={{ marginTop: 30 }}>
 				<Header>
 					<Left>
-						<Button transparent>
-							<Icon name="checkbox" style={{ color: 'white' }} />
-							<Title> List Name</Title>
+						<Button transparent onPress={() => this.props.navigation.goBack()}>
+							<Icon name="arrow-back" style={{ color: 'white' }} />
+							<Title style={{ paddingLeft: 5 }}>New Task</Title>
 						</Button>
 					</Left>
 					<Right>
 						<Button transparent>
-							<Icon name="search" />
-						</Button>
-						<Button transparent>
-							<Icon name="apps" />
+							<Icon
+								name="checkmark"
+								onPress={() => this.props.navigation.goBack()}
+							/>
 						</Button>
 					</Right>
 				</Header>
-				{/* <View>
-					<Text> NewTaskScreen </Text>
-				</View> */}
+				<Content>
+					<NewTaskForm />
+				</Content>
 			</Container>
 		);
 	}

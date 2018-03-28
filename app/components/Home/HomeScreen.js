@@ -16,6 +16,7 @@ import {
 	Fab
 } from 'native-base';
 
+import TaskList from './TaskList';
 export default class ToDoScreen extends Component {
 	constructor(props) {
 		super(props);
@@ -46,6 +47,7 @@ export default class ToDoScreen extends Component {
 						</Button>
 					</Right>
 				</Header>
+				<TaskList />
 				<View style={{ flex: 1 }}>
 					<Fab
 						active={this.state.active}
