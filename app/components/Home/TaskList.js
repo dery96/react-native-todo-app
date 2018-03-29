@@ -19,51 +19,6 @@ export default class TaskList extends Component {
 					name: 'Clean Window',
 					since: new Date().toDateString(),
 					until: new Date().toDateString()
-				},
-				{
-					name: 'Rect Project',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				},
-				{
-					name: 'Easter',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				},
-				{
-					name: 'Mechanic Visit',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				},
-				{
-					name: 'Unity game',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				},
-				{
-					name: 'Clean Window',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				},
-				{
-					name: 'Rect Project',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				},
-				{
-					name: 'Easter',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				},
-				{
-					name: 'Mechanic Visit',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				},
-				{
-					name: 'Unity game',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
 				}
 			]
 		};

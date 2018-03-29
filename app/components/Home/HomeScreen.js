@@ -59,7 +59,7 @@ export default class ToDoScreen extends Component {
 					>
 						<Icon name="add" />
 						{/* <Button style={{ backgroundColor: '#34A34F' }}>
-							<Icon name="logo-whatsapp" />
+			1				<Icon name="logo-whatsapp" />
 						</Button>
 						<Button style={{ backgroundColor: '#3B5998' }}>
 							<Icon name="logo-facebook" />

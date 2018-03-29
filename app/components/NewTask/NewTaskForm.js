@@ -89,6 +89,20 @@ export default class NewTaskForm extends Component {
 							<Picker.Item label="Home" value="key1" />
 							<Picker.Item label="Hobby" value="key2" />
 						</Picker>
+						<View
+							style={{
+								alignSelf: 'center',
+								marginTop: 10
+							}}
+						>
+							<Button
+								rounded
+								small
+								onPress={() => this.props.navigation.navigate('NewList')}
+							>
+								<Text>Create New List</Text>
+							</Button>
+						</View>
 					</Form>
 				</Content>
 			</Container>

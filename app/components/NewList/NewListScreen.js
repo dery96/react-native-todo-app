@@ -13,18 +13,19 @@ import {
 	Content
 } from 'native-base';
 
-import NewTaskForm from './NewTaskForm';
 import NewHeader from '../NewHeader';
-export default class NewTaskScreen extends Component {
+
+export default class NewListScreen extends Component {
 	static navigationOptions = {
 		header: null
 	};
 	render() {
 		return (
 			<Container style={{ marginTop: 30 }}>
-				<NewHeader navigation={this.props.navigation} title={'New Task'} />
+				<NewHeader navigation={this.props.navigation} title={'New List'} />
 				<Content>
-					<NewTaskForm navigation={this.props.navigation} />
+					<Text>NEW KABANOS</Text>
+					{/* <NewTaskForm /> */}
 				</Content>
 			</Container>
 		);

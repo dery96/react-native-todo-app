@@ -3,9 +3,13 @@ import { StackNavigator } from 'react-navigation';
 import { Root } from 'native-base';
 import { Font, AppLoading } from 'expo';
 
+import { Provider } from 'react-redux';
+import configureStore from './app/config/configureStore';
+
 import HomeScreen from './app/components/Home/HomeScreen';
 import TaskScreen from './app/components/Task/TaskScreen';
 import NewTaskScreen from './app/components/NewTask/NewTaskScreen';
+import NewListScreen from './app/components/NewList/NewListScreen';
 
 const AppNavigator = StackNavigator(
 	{
@@ -17,10 +21,13 @@ const AppNavigator = StackNavigator(
 		},
 		NewTask: {
 			screen: NewTaskScreen
+		},
+		NewList: {
+			screen: NewListScreen
 		}
 	},
 	{
-		initialRouteName: 'Home'
+		initialRouteName: 'NewTask'
 		// navigationOptions: {
 		// 	headerStyle: {
 		// 		paddingTop: 30,
@@ -47,15 +54,19 @@ export default class App extends Component {
 	render() {
 		if (this.state.loading) {
 			return (
-				<Root>
-					<AppLoading />
-				</Root>
+				<Provider store={configureStore}>
+					<Root>
+						<AppLoading />
+					</Root>
+				</Provider>
 			);
 		}
 		return (
-			<Root>
-				<AppNavigator />
-			</Root>
+			<Provider store={configureStore}>
+				<Root>
+					<AppNavigator />
+				</Root>
+			</Provider>
 		);
 	}
 }
