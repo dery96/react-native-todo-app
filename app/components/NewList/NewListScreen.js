@@ -13,6 +13,7 @@ import {
 	Content
 } from 'native-base';
 
+import I18n from '../../i18n/i18n';
 import NewHeader from '../NewHeader';
 
 export default class NewListScreen extends Component {
@@ -22,7 +23,10 @@ export default class NewListScreen extends Component {
 	render() {
 		return (
 			<Container style={{ marginTop: 30 }}>
-				<NewHeader navigation={this.props.navigation} title={'New List'} />
+				<NewHeader
+					navigation={this.props.navigation}
+					title={I18n.t('new_list.headerTitle')}
+				/>
 				<Content>
 					<Text>NEW KABANOS</Text>
 					{/* <NewTaskForm /> */}
