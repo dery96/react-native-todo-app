@@ -29,15 +29,17 @@ class NewHeader extends Component {
 	onSumbit(e) {
 		const { dispatch, operation } = this.props;
 		if (operation === 'newTask') {
-			this.props.dispatch(
-				newTaskAction({
-					name: this.props.taskName,
-					since: this.props.dateSince,
-					until: this.props.dateUntil,
-					category: this.props.category
-				})
-			);
-			this.props.navigation.goBack();
+			if (this.props.taskName && this.props.dateUntil) {
+				this.props.dispatch(
+					newTaskAction({
+						name: this.props.taskName,
+						since: this.props.dateSince,
+						until: this.props.dateUntil,
+						category: this.props.category
+					})
+				);
+				this.props.navigation.goBack();
+			}
 		} else {
 			this.props.navigation.goBack();
 		}

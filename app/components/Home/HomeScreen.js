@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
 	Container,
 	Header,
@@ -13,27 +13,52 @@ import {
 	Body,
 	Icon,
 	Text,
-	Fab
+	Fab,
+	Picker
 } from 'native-base';
 
 import TaskList from './TaskList';
 export default class ToDoScreen extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			active: 'true'
-		};
-	}
 	static navigationOptions = {
 		header: null
 	};
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			active: false
+		};
+		this.filterOptions = this.filterOptions.bind(this);
+	}
+
+	// filterOptions() {
+	// 	return this.props.categoryList.map(() => {
+	// 					return (
+	// 		<Button
+	// 			transparent
+	// 			onPress={() => {
+	// 				this.setState({ active: !this.state.active });
+	// 			}}
+	// 		>
+	// 			<Icon name="checkbox" style={{ color: 'white' }} />
+	// 			<Title> List Name</Title>
+	// 		</Button>
+	// 		);
+
+	// 	})
+	// }
 
 	render() {
 		return (
 			<Container style={{ paddingTop: 30 }}>
 				<Header>
 					<Left>
-						<Button transparent>
+						<Button
+							transparent
+							onPress={() => {
+								this.setState({ active: !this.state.active });
+							}}
+						>
 							<Icon name="checkbox" style={{ color: 'white' }} />
 							<Title> List Name</Title>
 						</Button>
@@ -47,6 +72,15 @@ export default class ToDoScreen extends Component {
 						</Button>
 					</Right>
 				</Header>
+				{this.state.active ? (
+					<View style={styles.filter}>
+						<Text>I'm there bro</Text>
+						<Text>also there</Text>
+						<Text>and therer</Text>
+					</View>
+				) : (
+					<View style={{ position: 'absolute', width: 1, height: 1 }} />
+				)}
 				<TaskList />
 				<View style={{ flex: 1 }}>
 					<Fab
@@ -59,7 +93,7 @@ export default class ToDoScreen extends Component {
 					>
 						<Icon name="add" />
 						{/* <Button style={{ backgroundColor: '#34A34F' }}>
-			1				<Icon name="logo-whatsapp" />
+							<Icon name="logo-whatsapp" />
 						</Button>
 						<Button style={{ backgroundColor: '#3B5998' }}>
 							<Icon name="logo-facebook" />
@@ -73,3 +107,33 @@ export default class ToDoScreen extends Component {
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	picker: {
+		width: 120,
+		position: 'absolute',
+		top: 0,
+		left: 30
+	},
+	pickerItem: {
+		color: 'white'
+	},
+	filter: {
+		position: 'relative',
+		// top: 30,
+		display: 'flex',
+		alignSelf: 'flex-start',
+		flexDirection: 'column',
+		zIndex: 999,
+		backgroundColor: 'white'
+	}
+});
+
+
+function mapStateToProps(state) {
+	return {
+		categoryList: state.get('categoryList'),
+	};
+}
+
+export default connect(mapStateToProps)(ToDoScreen);

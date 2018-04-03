@@ -30,11 +30,11 @@ class NewTaskScreen extends Component {
 		super(props);
 		this.state = {
 			taskName: undefined,
-			dateSince: '',
-			dateUntil: '',
+			dateSince: undefined,
+			dateUntil: undefined,
 			calendar: false,
 			selectedDate: '',
-			selectedValue: undefined
+			selectedValue: 'No category'
 		};
 		this.onDateChange = this.onDateChange.bind(this);
 		this.categoryListPickerItems = this.categoryListPickerItems.bind(this);
@@ -156,7 +156,6 @@ class NewTaskScreen extends Component {
 								</Button>
 								<Button
 									transparent
-									style={{ marginLeft: 0 }}
 									onPress={() => this.setState({ dateUntil: '' })}
 								>
 									<Icon

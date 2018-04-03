@@ -37,7 +37,8 @@ const initialState = Map({
 			done: false
 		}
 	],
-	categoryList: ['No category', 'Work', 'Home']
+	categoryList: ['No category', 'Work', 'Home'],
+	filter: 'all'
 });
 
 const actionsMap = {
