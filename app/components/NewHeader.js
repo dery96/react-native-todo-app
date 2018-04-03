@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View } from 'react-native';
 import {
 	Container,
@@ -13,13 +14,34 @@ import {
 	Content
 } from 'native-base';
 
-export default class NewHeader extends Component {
-	constructor(props) {
-		super(props);
-	}
+import { newTaskAction } from '../actions/';
+
+class NewHeader extends Component {
 	static navigationOptions = {
 		header: null
 	};
+
+	constructor(props) {
+		super(props);
+		this.onSumbit = this.onSumbit.bind(this);
+	}
+
+	onSumbit(e) {
+		const { dispatch, operation } = this.props;
+		if (operation === 'newTask') {
+			this.props.dispatch(
+				newTaskAction({
+					name: this.props.taskName,
+					since: this.props.dateSince,
+					until: this.props.dateUntil,
+					category: this.props.category
+				})
+			);
+			this.props.navigation.goBack();
+		} else {
+			this.props.navigation.goBack();
+		}
+	}
 	render() {
 		return (
 			<Header>
@@ -30,14 +52,21 @@ export default class NewHeader extends Component {
 					</Button>
 				</Left>
 				<Right>
-					<Button transparent>
-						<Icon
-							name="checkmark"
-							onPress={() => this.props.navigation.goBack()}
-						/>
-					</Button>
+					{!this.props.noTick ? (
+						<Button transparent>
+							<Icon name="checkmark" onPress={() => this.onSumbit()} />
+						</Button>
+					) : (
+						<View style={{ position: 'absolute', width: 1, height: 1 }} />
+					)}
 				</Right>
 			</Header>
 		);
 	}
 }
+function mapStateToProps(state) {
+	return {
+		tasks: state.tasks
+	};
+}
+export default connect(mapStateToProps)(NewHeader);

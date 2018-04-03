@@ -13,6 +13,7 @@ export default {
 	new_list: {
 		headerTitle: 'New List',
 		enter_list: 'Enter list name',
+		your_task_list: 'Your task list:',
 		proceed: 'Proceed'
 	}
 };

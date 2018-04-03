@@ -1,19 +1,93 @@
-import { NEW_TASK, DELETE_TASK } from '../actions/types';
+import {
+	NEW_TASK,
+	DELETE_TASK,
+	NEW_LIST,
+	CHANGE_TASK_STATUS
+} from '../actions/types';
+import { Map } from 'immutable';
 
-const initialState = {
-	tasks: [],
-	lists: ['Work', 'Home', 'Project']
-};
+const initialState = Map({
+	tasks: [
+		{
+			name: 'First task from redux state',
+			until: 'Who knows',
+			since: undefined,
+			category: 'No category',
+			done: false
+		},
+		{
+			name: 'Clean the carpet',
+			until: 'Thr Apr 12',
+			since: undefined,
+			category: 'Home',
+			done: false
+		},
+		{
+			name: 'React project',
+			until: 'Who knows',
+			since: undefined,
+			category: 'Work',
+			done: false
+		},
+		{
+			name: 'Visit Sara',
+			until: 'Sat Apr 14',
+			since: undefined,
+			category: 'Home',
+			done: false
+		}
+	],
+	categoryList: ['No category', 'Work', 'Home']
+});
 
-const app = (state = initialState, action) => {
-	switch (action.type) {
-	case NEW_TASK:
-		return Object.assign({}, state, { tasks: action.task });
-	case DELETE_TASK:
-		return Object.assign({}, state, { tasks: [] });
-	default:
-		return state;
+const actionsMap = {
+	[NEW_TASK]: (state, action) => {
+		const tasks = [...state.get('tasks'), action.data];
+		return state.merge(
+			Map({
+				tasks
+			})
+		);
+	},
+
+	[DELETE_TASK]: (state, action) => {
+		return state.merge(
+			Map({
+				asyncLoading: true,
+				asyncError: null,
+				asyncData: null
+			})
+		);
+	},
+
+	[NEW_LIST]: (state, action) => {
+		const categoryList = [...state.get('categoryList'), action.data.name];
+		return state.merge(
+			Map({
+				categoryList
+			})
+		);
+	},
+
+	[CHANGE_TASK_STATUS]: (state, action) => {
+		const findSpecific = (name, tasks) => {
+			tasks.map(task => {
+				if (task.name === name) {
+					task.done = !task.done;
+				}
+			});
+			return tasks;
+		};
+		const tasks = findSpecific(action.data.name, state.get('tasks'));
+		return state.merge(
+			Map({
+				tasks
+			})
+		);
 	}
 };
 
-export default app;
+export default function reducer(state = initialState, action = {}) {
+	const fn = actionsMap[action.type];
+	return fn ? fn(state, action) : state;
+}

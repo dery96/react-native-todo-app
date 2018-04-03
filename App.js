@@ -27,7 +27,7 @@ const AppNavigator = StackNavigator(
 		}
 	},
 	{
-		initialRouteName: 'NewTask'
+		initialRouteName: 'Home'
 		// navigationOptions: {
 		// 	headerStyle: {
 		// 		paddingTop: 30,

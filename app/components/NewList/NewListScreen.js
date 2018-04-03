@@ -15,6 +15,7 @@ import {
 
 import I18n from '../../i18n/i18n';
 import NewHeader from '../NewHeader';
+import NewListForm from './NewListForm';
 
 export default class NewListScreen extends Component {
 	static navigationOptions = {
@@ -26,10 +27,10 @@ export default class NewListScreen extends Component {
 				<NewHeader
 					navigation={this.props.navigation}
 					title={I18n.t('new_list.headerTitle')}
+					noTick
 				/>
 				<Content>
-					<Text>NEW KABANOS</Text>
-					{/* <NewTaskForm /> */}
+					<NewListForm navigation={this.props.navigation} />
 				</Content>
 			</Container>
 		);

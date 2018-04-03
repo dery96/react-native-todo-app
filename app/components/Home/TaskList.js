@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { StyleSheet, View } from 'react-native';
 
 import {
 	Container,
@@ -8,55 +9,46 @@ import {
 	Card,
 	CardItem,
 	Text,
-	Body
+	Body,
+	CheckBox
 } from 'native-base';
-export default class TaskList extends Component {
+
+import Task from './Task';
+class TaskList extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			tasks: [
-				{
-					name: 'Clean Window',
-					since: new Date().toDateString(),
-					until: new Date().toDateString()
-				}
-			]
-		};
 		this.renderTasks = this.renderTasks.bind(this);
 	}
 
 	renderTasks() {
-		return this.state.tasks.map((task, index) => {
+		return this.props.tasks.map((task, index) => {
 			return (
-				<Card style={styles.taskMargin} key={index}>
-					<CardItem>
-						<Body>
-							<Text style={styles.taskName}>{task.name}</Text>
-							<Text style={styles.taskDate}>{task.until}</Text>
-						</Body>
-					</CardItem>
-				</Card>
+				<View key={index}>
+					<Task
+						name={task.name}
+						category={task.category}
+						done={task.done}
+						until={task.until}
+						since={task.since}
+					/>
+				</View>
 			);
 		});
 	}
+
 	render() {
 		return (
-			<Container style={{ padding: 20, paddingBottom: 100, flex: 20 }}>
+			<Container style={{ padding: 21, paddingBottom: 100, flex: 20 }}>
 				<Content style={{ height: '100%' }}>{this.renderTasks()}</Content>
 			</Container>
 		);
 	}
 }
 
-const styles = StyleSheet.create({
-	taskMargin: {
-		marginBottom: 10
-	},
-	taskName: {
-		fontSize: 18
-	},
-	taskDate: {
-		fontSize: 14,
-		color: '#C82323'
-	}
-});
+function mapStateToProps(state) {
+	return {
+		tasks: state.get('tasks')
+	};
+}
+
+export default connect(mapStateToProps)(TaskList);

@@ -1,47 +1,49 @@
 {
-  "name": "WorkScheduler",
-  "version": "0.1.0",
-  "private": true,
-  "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "jest-expo": "25.0.0",
-    "react-native-scripts": "1.11.1",
-    "react-test-renderer": "16.2.0"
-  },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
-  "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js"
-  },
-  "jest": {
-    "preset": "jest-expo"
-  },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "expo": "^25.0.0",
-    "native-base": "^2.4.1",
-    "react": "16.2.0",
-    "react-native": "0.52.0",
-    "react-native-calendar-picker": "^5.15.0",
-    "react-native-i18n": "^2.0.12",
-    "react-native-vector-icons": "^4.5.0",
-    "react-redux": "^5.0.7",
-    "react-router": "^4.2.0",
-    "react-router-native": "^4.2.0",
-    "react-router-navigation": "^1.0.0-rc.4",
-    "react-router-redux": "^4.0.8",
-    "redux": "^3.7.2",
-    "redux-axios-middleware": "^4.0.0",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
-    "remote-redux-devtools": "^0.5.12",
-    "remotedev-server": "^0.2.4"
-  }
+	"name": "WorkScheduler",
+	"version": "0.1.0",
+	"private": true,
+	"devDependencies": {
+		"eslint": "^4.19.1",
+		"eslint-config-airbnb": "^16.1.0",
+		"eslint-plugin-import": "^2.9.0",
+		"eslint-plugin-jsx-a11y": "^6.0.3",
+		"eslint-plugin-react": "^7.7.0",
+		"jest-expo": "25.0.0",
+		"react-native-scripts": "1.11.1",
+		"react-test-renderer": "16.2.0"
+	},
+	"main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+	"scripts": {
+		"start": "react-native-scripts start",
+		"eject": "react-native-scripts eject",
+		"android": "react-native-scripts android",
+		"ios": "react-native-scripts ios",
+		"test": "node node_modules/jest/bin/jest.js",
+		"postinstall": "rndebugger-open"
+	},
+	"jest": {
+		"preset": "jest-expo"
+	},
+	"dependencies": {
+		"axios": "^0.18.0",
+		"expo": "^25.0.0",
+		"immutable": "^3.8.2",
+		"native-base": "^2.4.1",
+		"react": "16.2.0",
+		"react-native": "0.52.0",
+		"react-native-calendar-picker": "^5.15.0",
+		"react-native-i18n": "^2.0.12",
+		"react-native-vector-icons": "^4.5.0",
+		"react-redux": "^5.0.7",
+		"react-router": "^4.2.0",
+		"react-router-native": "^4.2.0",
+		"react-router-navigation": "^1.0.0-rc.4",
+		"react-router-redux": "^4.0.8",
+		"redux": "^3.7.2",
+		"redux-axios-middleware": "^4.0.0",
+		"redux-logger": "^3.0.6",
+		"redux-thunk": "^2.2.0",
+		"remote-redux-devtools": "^0.5.12",
+		"remotedev-server": "^0.2.4"
+	}
 }

@@ -1,16 +1,35 @@
-import { NEW_TASK, DELETE_TASK } from './types.js';
+import {
+	NEW_TASK,
+	DELETE_TASK,
+	NEW_LIST,
+	CHANGE_TASK_STATUS
+} from './types.js';
 
-export function newTask(data) {
+export function newTaskAction(data) {
 	return {
 		type: NEW_TASK,
+		data: data
+	};
+}
+
+export function deleteTaskAction(data) {
+	return {
+		type: DELETE_TASK,
 		payload: data
 	};
 }
 
-export function deleteTask(error) {
+export function changeTaskStatusAction(data) {
 	return {
-		type: DELETE_TASK,
-		payload: error
+		type: CHANGE_TASK_STATUS,
+		data: data
+	};
+}
+
+export function newListAction(data) {
+	return {
+		type: NEW_LIST,
+		data: data
 	};
 }
 
@@ -33,6 +52,7 @@ export function deleteTask(error) {
 // }
 
 export default {
-	newTask,
-	deleteTask
+	newTaskAction,
+	deleteTaskAction,
+	changeTaskStatusAction
 };
