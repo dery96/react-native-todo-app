@@ -15,5 +15,11 @@ export default {
 		enter_list: 'Enter list name',
 		your_task_list: 'Your task list:',
 		proceed: 'Proceed'
+	},
+	pomodoro: {
+		title: 'Pomodoro Timer',
+		start: 'Start',
+		stop: 'Stop',
+		clear: 'Clear'
 	}
 };

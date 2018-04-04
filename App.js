@@ -12,6 +12,9 @@ import NewTaskScreen from './app/components/NewTask/NewTaskScreen';
 import NewListScreen from './app/components/NewList/NewListScreen';
 import PomodoroScreen from './app/components/Pomodoro/PomodoroScreen';
 
+const { NativeModules } = require('react-native');
+const { RNI18n } = NativeModules;
+
 const AppNavigator = StackNavigator(
 	{
 		Home: {
