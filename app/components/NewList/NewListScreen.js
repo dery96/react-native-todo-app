@@ -23,7 +23,15 @@ export default class NewListScreen extends Component {
 	};
 	render() {
 		return (
-			<Container style={{ marginTop: 30 }}>
+			<Container>
+				<View
+					style={{
+						height: 24,
+						backgroundColor: '#1a224f',
+						margin: 0,
+						padding: 0
+					}}
+				/>
 				<NewHeader
 					navigation={this.props.navigation}
 					title={I18n.t('new_list.headerTitle')}

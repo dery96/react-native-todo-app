@@ -120,7 +120,15 @@ class ToDoScreen extends Component {
 
 	render() {
 		return (
-			<Container style={{ paddingTop: 30 }}>
+			<Container>
+				<View
+					style={{
+						height: 24,
+						backgroundColor: '#1a224f',
+						margin: 0,
+						padding: 0
+					}}
+				/>
 				<Header>
 					<Left>
 						<Button
