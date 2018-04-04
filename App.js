@@ -10,6 +10,7 @@ import HomeScreen from './app/components/Home/HomeScreen';
 import TaskScreen from './app/components/Task/TaskScreen';
 import NewTaskScreen from './app/components/NewTask/NewTaskScreen';
 import NewListScreen from './app/components/NewList/NewListScreen';
+import PomodoroScreen from './app/components/Pomodoro/PomodoroScreen';
 
 const AppNavigator = StackNavigator(
 	{
@@ -24,6 +25,9 @@ const AppNavigator = StackNavigator(
 		},
 		NewList: {
 			screen: NewListScreen
+		},
+		Pomodoro: {
+			screen: PomodoroScreen
 		}
 	},
 	{
