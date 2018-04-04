@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Container, Content } from 'native-base';
 
 import Task from './Task';
@@ -29,7 +29,15 @@ class TaskList extends Component {
 	render() {
 		return (
 			<Container style={{ padding: 21, paddingBottom: 100, flex: 20 }}>
-				<Content style={{ height: '100%' }}>{this.renderTasks()}</Content>
+				{this.props.tasks.length === 0 ? (
+					<View style={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
+						<Text style={{ color: 'grey', textAlign: 'center' }}>
+							There's nothing to do...
+						</Text>
+					</View>
+				) : (
+					<Content style={{ height: '100%' }}>{this.renderTasks()}</Content>
+				)}
 			</Container>
 		);
 	}

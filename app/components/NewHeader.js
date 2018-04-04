@@ -47,7 +47,7 @@ class NewHeader extends Component {
 	render() {
 		return (
 			<Header>
-				<Left>
+				<Left style={{ flex: 4 }}>
 					<Button transparent onPress={() => this.props.navigation.goBack()}>
 						<Icon name="arrow-back" style={{ color: 'white' }} />
 						<Title style={{ paddingLeft: 5 }}>{this.props.title}</Title>

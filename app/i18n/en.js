@@ -14,7 +14,7 @@ export default {
 		headerTitle: 'New List',
 		enter_list: 'Enter list name',
 		your_task_list: 'Your task list:',
-		proceed: 'Proceed'
+		btn: 'Create new list'
 	},
 	pomodoro: {
 		title: 'Pomodoro Timer',

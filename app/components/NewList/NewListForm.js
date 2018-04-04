@@ -63,8 +63,8 @@ class NewTaskForm extends Component {
 							alignSelf: 'center'
 						}}
 					>
-						<Button rounded full onPress={() => this.onSumbit()}>
-							<Text>{I18n.t('new_task.new_list_btn')}</Text>
+						<Button rounded onPress={() => this.onSumbit()}>
+							<Text style={{ color: 'white' }}>{I18n.t('new_list.btn')}</Text>
 						</Button>
 					</View>
 				</Content>

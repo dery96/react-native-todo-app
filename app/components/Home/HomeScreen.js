@@ -107,13 +107,14 @@ class ToDoScreen extends Component {
 
 	filterTasks() {
 		return this.props.tasks.filter(task => {
-			if (this.props.filter === 'all') {
-				return true;
-			} else if (this.props.filter === task.category) {
-				return true;
-			} else {
-				return false;
+			if (!task.done) {
+				if (this.props.filter === 'all') {
+					return true;
+				} else if (this.props.filter === task.category) {
+					return true;
+				}
 			}
+			return false;
 		});
 	}
 

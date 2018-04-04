@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect, bindActionCreators } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
-import { Card, CardItem, CheckBox, Body, Text } from 'native-base';
+import { Card, CardItem, CheckBox, Body, Text, Icon } from 'native-base';
 
 import { changeTaskStatusAction } from '../../actions/';
 
@@ -8,9 +9,6 @@ class Task extends Component {
 	constructor(props) {
 		super(props);
 		this.changeTaskStatus = this.changeTaskStatus.bind(this);
-		this.state = {
-			done: this.props.done
-		};
 	}
 
 	changeTaskStatus() {
@@ -19,7 +17,6 @@ class Task extends Component {
 				name: this.props.name
 			})
 		);
-		this.props.done = !this.props.done;
 	}
 
 	render() {
@@ -28,10 +25,12 @@ class Task extends Component {
 				<CardItem>
 					<CheckBox
 						style={styles.checkBox}
-						checked={this.state.done}
+						checked={this.props.done}
 						color={'black'}
-						onPress={() => this.setState({ done: !this.state.done })}
-					/>
+						onPress={() => this.changeTaskStatus()}
+					>
+						<Icon name="pause" style={styles.buttonsText} />
+					</CheckBox>
 					<Body style={{ paddingLeft: 30 }}>
 						<Text style={styles.taskName}>{this.props.name}</Text>
 						<Text style={styles.taskDate}>{this.props.until}</Text>
@@ -91,4 +90,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Task;
+export default connect(null)(Task);
