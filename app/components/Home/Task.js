@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
 import { Card, CardItem, CheckBox, Body, Text } from 'native-base';
 
 import { changeTaskStatusAction } from '../../actions/';
@@ -92,12 +91,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-function mapStateToProps(state) {
-	return {
-		tasks: state.get('tasks')
-	};
-}
-
-export default connect(mapStateToProps)(Task);
-
-// export default Task;
+export default Task;

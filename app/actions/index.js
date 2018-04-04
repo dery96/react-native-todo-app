@@ -2,7 +2,8 @@ import {
 	NEW_TASK,
 	DELETE_TASK,
 	NEW_LIST,
-	CHANGE_TASK_STATUS
+	CHANGE_TASK_STATUS,
+	CHANGE_FILTER
 } from './types.js';
 
 export function newTaskAction(data) {
@@ -22,6 +23,13 @@ export function deleteTaskAction(data) {
 export function changeTaskStatusAction(data) {
 	return {
 		type: CHANGE_TASK_STATUS,
+		data: data
+	};
+}
+
+export function changeFilterAction(data) {
+	return {
+		type: CHANGE_FILTER,
 		data: data
 	};
 }
@@ -54,5 +62,6 @@ export function newListAction(data) {
 export default {
 	newTaskAction,
 	deleteTaskAction,
-	changeTaskStatusAction
+	changeTaskStatusAction,
+	changeFilterAction
 };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import {
 	Container,
 	Header,
@@ -17,8 +18,10 @@ import {
 	Picker
 } from 'native-base';
 
+import { changeFilterAction } from '../../actions';
 import TaskList from './TaskList';
-export default class ToDoScreen extends Component {
+
+class ToDoScreen extends Component {
 	static navigationOptions = {
 		header: null
 	};
@@ -29,24 +32,39 @@ export default class ToDoScreen extends Component {
 			active: false
 		};
 		this.filterOptions = this.filterOptions.bind(this);
+		this.filterTasks = this.filterTasks.bind(this);
 	}
 
-	// filterOptions() {
-	// 	return this.props.categoryList.map(() => {
-	// 					return (
-	// 		<Button
-	// 			transparent
-	// 			onPress={() => {
-	// 				this.setState({ active: !this.state.active });
-	// 			}}
-	// 		>
-	// 			<Icon name="checkbox" style={{ color: 'white' }} />
-	// 			<Title> List Name</Title>
-	// 		</Button>
-	// 		);
+	filterOptions() {
+		const filterCategory = ['all', ...this.props.categoryList];
+		return filterCategory.map((category, index) => {
+			return (
+				<Button
+					small
+					key={index}
+					style={{ marginTop: 5 }}
+					onPress={() => {
+						this.props.dispatch(changeFilterAction({ filter: category }));
+						this.setState({ active: !this.state.active });
+					}}
+				>
+					<Text>{' ' + category[0].toUpperCase() + category.slice(1)}</Text>
+				</Button>
+			);
+		});
+	}
 
-	// 	})
-	// }
+	filterTasks() {
+		return this.props.tasks.filter(task => {
+			if (this.props.filter === 'all') {
+				return true;
+			} else if (this.props.filter === task.category) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	}
 
 	render() {
 		return (
@@ -60,7 +78,11 @@ export default class ToDoScreen extends Component {
 							}}
 						>
 							<Icon name="checkbox" style={{ color: 'white' }} />
-							<Title> List Name</Title>
+							<Title>
+								{' ' +
+									this.props.filter[0].toUpperCase() +
+									this.props.filter.slice(1)}
+							</Title>
 						</Button>
 					</Left>
 					<Right>
@@ -74,14 +96,18 @@ export default class ToDoScreen extends Component {
 				</Header>
 				{this.state.active ? (
 					<View style={styles.filter}>
-						<Text>I'm there bro</Text>
-						<Text>also there</Text>
-						<Text>and therer</Text>
+						<Content
+							style={styles.filterContent}
+							showsHorizontalScrollIndicator={false}
+							showsVerticalScrollIndicator={false}
+						>
+							{this.filterOptions()}
+						</Content>
 					</View>
 				) : (
 					<View style={{ position: 'absolute', width: 1, height: 1 }} />
 				)}
-				<TaskList />
+				<TaskList tasks={this.filterTasks()} />
 				<View style={{ flex: 1 }}>
 					<Fab
 						active={this.state.active}
@@ -92,15 +118,6 @@ export default class ToDoScreen extends Component {
 						onPress={() => this.props.navigation.navigate('NewTask')}
 					>
 						<Icon name="add" />
-						{/* <Button style={{ backgroundColor: '#34A34F' }}>
-							<Icon name="logo-whatsapp" />
-						</Button>
-						<Button style={{ backgroundColor: '#3B5998' }}>
-							<Icon name="logo-facebook" />
-						</Button>
-						<Button disabled style={{ backgroundColor: '#DD5144' }}>
-							<Icon name="mail" />
-						</Button> */}
 					</Fab>
 				</View>
 			</Container>
@@ -120,19 +137,25 @@ const styles = StyleSheet.create({
 	},
 	filter: {
 		position: 'relative',
-		// top: 30,
+		left: 0,
 		display: 'flex',
 		alignSelf: 'flex-start',
 		flexDirection: 'column',
 		zIndex: 999,
-		backgroundColor: 'white'
+		paddingLeft: 20,
+		paddingRight: 20,
+		height: 110
+	},
+	filterContent: {
+		paddingRight: 20
 	}
 });
-
 
 function mapStateToProps(state) {
 	return {
 		categoryList: state.get('categoryList'),
+		tasks: state.get('tasks'),
+		filter: state.get('filter')
 	};
 }
 

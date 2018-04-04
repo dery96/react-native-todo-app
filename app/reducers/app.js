@@ -2,7 +2,8 @@ import {
 	NEW_TASK,
 	DELETE_TASK,
 	NEW_LIST,
-	CHANGE_TASK_STATUS
+	CHANGE_TASK_STATUS,
+	CHANGE_FILTER
 } from '../actions/types';
 import { Map } from 'immutable';
 
@@ -37,7 +38,7 @@ const initialState = Map({
 			done: false
 		}
 	],
-	categoryList: ['No category', 'Work', 'Home'],
+	categoryList: ['Work', 'Home', 'No category'],
 	filter: 'all'
 });
 
@@ -83,6 +84,15 @@ const actionsMap = {
 		return state.merge(
 			Map({
 				tasks
+			})
+		);
+	},
+
+	[CHANGE_FILTER]: (state, action) => {
+		const filter = action.data.filter;
+		return state.merge(
+			Map({
+				filter
 			})
 		);
 	}
