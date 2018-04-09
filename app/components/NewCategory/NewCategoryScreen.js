@@ -15,9 +15,9 @@ import {
 
 import I18n from '../../i18n/i18n';
 import NewHeader from '../NewHeader';
-import NewListForm from './NewListForm';
+import NewCategoryForm from './NewCategoryForm';
 
-export default class NewListScreen extends Component {
+export default class NewCategoryScreen extends Component {
 	static navigationOptions = {
 		header: null
 	};
@@ -38,7 +38,7 @@ export default class NewListScreen extends Component {
 					noTick
 				/>
 				<Content>
-					<NewListForm navigation={this.props.navigation} />
+					<NewCategoryForm navigation={this.props.navigation} />
 				</Content>
 			</Container>
 		);

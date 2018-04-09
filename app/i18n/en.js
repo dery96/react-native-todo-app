@@ -12,7 +12,7 @@ export default {
 	},
 	new_list: {
 		headerTitle: 'New List',
-		enter_list: 'Enter list name',
+		enter_category: 'Enter category name',
 		your_task_list: 'Your task list:',
 		btn: 'Create new list'
 	},

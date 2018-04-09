@@ -1,7 +1,7 @@
 import {
 	NEW_TASK,
 	DELETE_TASK,
-	NEW_LIST,
+	NEW_CATEGORY,
 	CHANGE_TASK_STATUS,
 	CHANGE_FILTER
 } from './types.js';
@@ -34,9 +34,9 @@ export function changeFilterAction(data) {
 	};
 }
 
-export function newListAction(data) {
+export function newCategoryAction(data) {
 	return {
-		type: NEW_LIST,
+		type: NEW_CATEGORY,
 		data: data
 	};
 }
@@ -63,5 +63,6 @@ export default {
 	newTaskAction,
 	deleteTaskAction,
 	changeTaskStatusAction,
-	changeFilterAction
+	changeFilterAction,
+	newCategoryAction
 };

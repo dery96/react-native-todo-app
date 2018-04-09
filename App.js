@@ -9,7 +9,7 @@ import configureStore from './app/config/configureStore';
 import HomeScreen from './app/components/Home/HomeScreen';
 import TaskScreen from './app/components/Task/TaskScreen';
 import NewTaskScreen from './app/components/NewTask/NewTaskScreen';
-import NewListScreen from './app/components/NewList/NewListScreen';
+import NewCategoryScreen from './app/components/NewCategory/NewCategoryScreen';
 import PomodoroScreen from './app/components/Pomodoro/PomodoroScreen';
 
 const { NativeModules } = require('react-native');
@@ -26,8 +26,8 @@ const AppNavigator = StackNavigator(
 		NewTask: {
 			screen: NewTaskScreen
 		},
-		NewList: {
-			screen: NewListScreen
+		NewCategory: {
+			screen: NewCategoryScreen
 		},
 		Pomodoro: {
 			screen: PomodoroScreen

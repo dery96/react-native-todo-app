@@ -33,8 +33,9 @@ class NewTaskScreen extends Component {
 			dateSince: undefined,
 			dateUntil: undefined,
 			calendar: false,
+			category: ['Work', '#e46'],
 			selectedDate: '',
-			selectedValue: 'No category'
+			selectedValue: 'Work'
 		};
 		this.onDateChange = this.onDateChange.bind(this);
 		this.categoryListPickerItems = this.categoryListPickerItems.bind(this);
@@ -56,7 +57,9 @@ class NewTaskScreen extends Component {
 
 	categoryListPickerItems(categoryList) {
 		return categoryList.map((category, index) => {
-			return <Picker.Item label={category} value={category} key={index} />;
+			return (
+				<Picker.Item label={category.name} value={category.name} key={index} />
+			);
 		});
 	}
 
@@ -77,9 +80,10 @@ class NewTaskScreen extends Component {
 					taskName={this.state.taskName}
 					dateSince={this.state.dateSince}
 					dateUntil={this.state.dateUntil}
-					category={this.state.selectedValue}
+					category={this.state.category}
 					operation={'newTask'}
 				/>
+
 				<Content>
 					<Container style={{ padding: 25 }}>
 						{this.state.calendar ? (
@@ -181,9 +185,17 @@ class NewTaskScreen extends Component {
 									mode="dropdown"
 									placeholder="Select One"
 									selectedValue={this.state.selectedValue}
-									onValueChange={selectedValue =>
-										this.setState({ selectedValue })
-									}
+									onValueChange={selectedValue => {
+										const newCategory = this.props.categoryList.filter(
+											category => {
+												return selectedValue === category.name ? true : false;
+											}
+										);
+										this.setState({
+											selectedValue: selectedValue,
+											category: newCategory[0]
+										});
+									}}
 								>
 									{this.categoryListPickerItems(this.props.categoryList)}
 								</Picker>
@@ -196,7 +208,9 @@ class NewTaskScreen extends Component {
 									<Button
 										rounded
 										small
-										onPress={() => this.props.navigation.navigate('NewList')}
+										onPress={() =>
+											this.props.navigation.navigate('NewCategory')
+										}
 									>
 										<Text>{I18n.t('new_task.new_list_btn')}</Text>
 									</Button>

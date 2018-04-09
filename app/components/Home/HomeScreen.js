@@ -87,7 +87,10 @@ class ToDoScreen extends Component {
 	}
 
 	filterOptions() {
-		const filterCategory = ['all', ...this.props.categoryList];
+		const filterCategory = [
+			{ name: 'all', color: undefined },
+			...this.props.categoryList
+		];
 		return filterCategory.map((category, index) => {
 			return (
 				<Button
@@ -95,11 +98,14 @@ class ToDoScreen extends Component {
 					key={index}
 					style={{ marginTop: 5 }}
 					onPress={() => {
-						this.props.dispatch(changeFilterAction({ filter: category }));
+						this.props.dispatch(changeFilterAction({ filter: category.name }));
 						this.setState({ activeFilter: !this.state.activeFilter });
 					}}
 				>
-					<Text>{' ' + category[0].toUpperCase() + category.slice(1)}</Text>
+					<Text>
+						{/* {' ' + category.name.toUpperCase() + category.name.slice(1)} */}
+						{category.name}
+					</Text>
 				</Button>
 			);
 		});
@@ -110,7 +116,7 @@ class ToDoScreen extends Component {
 			if (!task.done) {
 				if (this.props.filter === 'all') {
 					return true;
-				} else if (this.props.filter === task.category) {
+				} else if (this.props.filter === task.category.name) {
 					return true;
 				}
 			}

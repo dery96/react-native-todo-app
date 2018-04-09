@@ -30,6 +30,7 @@ class NewHeader extends Component {
 		const { dispatch, operation } = this.props;
 		if (operation === 'newTask') {
 			if (this.props.taskName && this.props.dateUntil) {
+				console.log(this.props.category);
 				this.props.dispatch(
 					newTaskAction({
 						name: this.props.taskName,

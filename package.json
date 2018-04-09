@@ -29,6 +29,7 @@
 		"expo": "^25.0.0",
 		"immutable": "^3.8.2",
 		"native-base": "^2.4.1",
+		"prop-types": "^15.6.1",
 		"react": "16.2.0",
 		"react-native": "0.52.0",
 		"react-native-calendar-picker": "^5.15.0",

@@ -1,7 +1,7 @@
 import {
 	NEW_TASK,
 	DELETE_TASK,
-	NEW_LIST,
+	NEW_CATEGORY,
 	CHANGE_TASK_STATUS,
 	CHANGE_FILTER
 } from '../actions/types';
@@ -13,37 +13,47 @@ const initialState = Map({
 			name: 'First task from redux state',
 			until: 'Who knows',
 			since: undefined,
-			category: 'No category',
+			category: { name: 'No category', color: '#F0AD4E' },
 			done: false
 		},
 		{
 			name: 'Clean the carpet',
 			until: 'Thr Apr 12',
 			since: undefined,
-			category: 'Home',
+			category: { name: 'Home', color: '#292B2C' },
 			done: false
 		},
 		{
 			name: 'React project',
 			until: 'Who knows',
 			since: undefined,
-			category: 'Work',
+			category: { name: 'Work', color: '#e43' },
 			done: false
 		},
 		{
 			name: 'Visit Sara',
 			until: 'Sat Apr 14',
 			since: undefined,
-			category: 'Home',
+			category: { name: 'Home', color: '#292B2C' },
 			done: false
 		}
 	],
-	categoryList: ['Work', 'Home', 'No category'],
+	categoryList: [
+		{ name: 'Work', color: '#e43' },
+		{ name: 'Home', color: '#292B2C' },
+		{ name: 'No category', color: '#F0AD4E' }
+	],
+	colors: ['#e43', '#292B2C', '#F0AD4E', '#5BC0DE', '#5CB85C', '#0275D8'],
 	filter: 'all'
 });
 
 const actionsMap = {
 	[NEW_TASK]: (state, action) => {
+		const category = {
+			name: action.data.category.name,
+			color: action.data.category.color
+		};
+		action.data.category = category;
 		const tasks = [...state.get('tasks'), action.data];
 		return state.merge(
 			Map({
@@ -62,8 +72,11 @@ const actionsMap = {
 		);
 	},
 
-	[NEW_LIST]: (state, action) => {
-		const categoryList = [...state.get('categoryList'), action.data.name];
+	[NEW_CATEGORY]: (state, action) => {
+		const categoryList = [
+			...state.get('categoryList'),
+			{ name: action.data.name, color: action.data.color }
+		];
 		return state.merge(
 			Map({
 				categoryList

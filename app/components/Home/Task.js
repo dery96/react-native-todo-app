@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect, bindActionCreators } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import { Card, CardItem, CheckBox, Body, Text, Icon } from 'native-base';
 
 import { changeTaskStatusAction } from '../../actions/';
@@ -35,8 +36,15 @@ class Task extends Component {
 						<Text style={styles.taskName}>{this.props.name}</Text>
 						<Text style={styles.taskDate}>{this.props.until}</Text>
 					</Body>
-					<View style={styles.cornerRibbon}>
-						<Text style={styles.cornerRibbonText}>{this.props.category}</Text>
+					<View
+						style={[
+							{ backgroundColor: this.props.category.color },
+							styles.cornerRibbon
+						]}
+					>
+						<Text style={styles.cornerRibbonText}>
+							{this.props.category.name}
+						</Text>
 					</View>
 				</CardItem>
 			</Card>
@@ -56,7 +64,6 @@ const styles = StyleSheet.create({
 		color: '#C82323'
 	},
 	cornerRibbon: {
-		backgroundColor: '#e43',
 		width: 250,
 		top: 18,
 		right: -100,
@@ -90,4 +97,7 @@ const styles = StyleSheet.create({
 	}
 });
 
+// Task.propTypes = {
+// 	name: PropTypes.string.isRequired
+// };
 export default connect(null)(Task);
