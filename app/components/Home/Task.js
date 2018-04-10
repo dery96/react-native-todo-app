@@ -23,7 +23,7 @@ class Task extends Component {
 	render() {
 		return (
 			<Card style={styles.taskMargin}>
-				<CardItem>
+				<CardItem style={this.props.done ? styles.doneTask : {}}>
 					<CheckBox
 						style={styles.checkBox}
 						checked={this.props.done}
@@ -32,9 +32,20 @@ class Task extends Component {
 					>
 						<Icon name="pause" style={styles.buttonsText} />
 					</CheckBox>
-					<Body style={{ paddingLeft: 30 }}>
+					<Body
+						style={{
+							paddingLeft: 30
+						}}
+					>
 						<Text style={styles.taskName}>{this.props.name}</Text>
-						<Text style={styles.taskDate}>{this.props.until}</Text>
+						<Text
+							style={[
+								styles.taskDate,
+								this.props.overdue ? { color: '#C82323' } : { color: '#0275D8' }
+							]}
+						>
+							{this.props.until}
+						</Text>
 					</Body>
 					<View
 						style={[
@@ -53,6 +64,9 @@ class Task extends Component {
 }
 
 const styles = StyleSheet.create({
+	doneTask: {
+		opacity: 0.4
+	},
 	taskMargin: {
 		marginBottom: 5
 	},
@@ -60,8 +74,7 @@ const styles = StyleSheet.create({
 		fontSize: 18
 	},
 	taskDate: {
-		fontSize: 14,
-		color: '#C82323'
+		fontSize: 14
 	},
 	cornerRibbon: {
 		width: 250,
@@ -98,6 +111,11 @@ const styles = StyleSheet.create({
 });
 
 Task.propTypes = {
-	name: PropTypes.string.isRequired
+	name: PropTypes.string.isRequired,
+	done: PropTypes.bool.isRequired,
+	until: PropTypes.string.isRequired,
+	category: PropTypes.objectOf(PropTypes.string),
+	overdue: PropTypes.bool.isRequired
 };
+
 export default connect(null)(Task);

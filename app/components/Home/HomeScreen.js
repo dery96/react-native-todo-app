@@ -114,12 +114,10 @@ class ToDoScreen extends Component {
 
 	filterTasksByCategory() {
 		return this.props.tasks.filter(task => {
-			if (!task.done) {
-				if (this.props.filter === 'all') {
-					return true;
-				} else if (this.props.filter === task.category.name) {
-					return true;
-				}
+			if (this.props.filter === 'all') {
+				return true;
+			} else if (this.props.filter === task.category.name) {
+				return true;
 			}
 			return false;
 		});
@@ -127,12 +125,13 @@ class ToDoScreen extends Component {
 
 	filterTasksByDays(tasks) {
 		const diffrentDays = [
-			{ name: 'Overdue', from: -999, to: -1 },
-			{ name: 'Today', from: 0, to: 0 },
-			{ name: 'Tomorrow', from: 1, to: 1 },
-			{ name: 'This week', from: 2, to: 7 },
-			{ name: 'Next week', from: 8, to: 14 },
-			{ name: 'Rest upcoming events', from: 15, to: 999 }
+			{ name: 'Overdue', from: -999, to: -1, onlyFinished: false },
+			{ name: 'Today', from: 0, to: 0, onlyFinished: false },
+			{ name: 'Tomorrow', from: 1, to: 1, onlyFinished: false },
+			{ name: 'This week', from: 2, to: 7, onlyFinished: false },
+			{ name: 'Next week', from: 8, to: 14, onlyFinished: false },
+			{ name: 'Rest upcoming events', from: 15, to: 999, onlyFinished: false },
+			{ name: 'Completed tasks', from: -999, to: 999, onlyFinished: true }
 		];
 		const actualYear = new Date().toString().slice(11, 16);
 		const todayStr = new Date().toString().slice(0, 16);
@@ -143,9 +142,15 @@ class ToDoScreen extends Component {
 			const filteredTasks = newTaskSet.filter(task => {
 				const taskDate = task.until + ' ' + actualYear;
 				daysDiff = moment.duration(moment(taskDate).diff(today)).asDays();
-				return daysDiff >= timeDay.from && daysDiff <= timeDay.to
-					? true
-					: false;
+				if (timeDay.onlyFinished) {
+					return task.done ? true : false;
+				} else {
+					return daysDiff >= timeDay.from &&
+						daysDiff <= timeDay.to &&
+						!task.done
+						? true
+						: false;
+				}
 			});
 			if (filteredTasks.length > 0) {
 				return (
@@ -161,7 +166,11 @@ class ToDoScreen extends Component {
 						>
 							{timeDay.name}
 						</Text>
-						<TaskList tasks={filteredTasks} />
+						{timeDay.name === 'Overdue' ? (
+							<TaskList tasks={filteredTasks} overdue={true} />
+						) : (
+							<TaskList tasks={filteredTasks} overdue={false} />
+						)}
 					</View>
 				);
 			}

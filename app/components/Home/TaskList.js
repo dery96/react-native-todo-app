@@ -20,6 +20,7 @@ class TaskList extends Component {
 					until={task.until}
 					since={task.since}
 					key={index}
+					overdue={this.props.overdue}
 				/>
 			);
 		});

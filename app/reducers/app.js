@@ -49,14 +49,7 @@ const initialState = Map({
 			until: 'Fri Apr 21',
 			since: undefined,
 			category: { name: 'University', color: '#5BC0DE' },
-			done: false
-		},
-		{
-			name: 'Unity Project',
-			until: 'Fri Apr 21',
-			since: undefined,
-			category: { name: 'University', color: '#5BC0DE' },
-			done: false
+			done: true
 		}
 	],
 	categoryList: [
