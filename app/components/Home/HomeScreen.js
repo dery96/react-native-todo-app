@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import moment from 'moment';
+
 import {
 	Container,
 	Header,
@@ -34,7 +36,9 @@ class ToDoScreen extends Component {
 		};
 
 		this.filterOptions = this.filterOptions.bind(this);
-		this.filterTasks = this.filterTasks.bind(this);
+		this.filterTasksByCategory = this.filterTasksByCategory.bind(this);
+		this.filterTasksByDays = this.filterTasksByDays.bind(this);
+		this.renderTasks = this.renderTasks.bind(this);
 		this.renderMenu = this.renderMenu.bind(this);
 		this.renderFab = this.renderFab.bind(this);
 	}
@@ -102,16 +106,13 @@ class ToDoScreen extends Component {
 						this.setState({ activeFilter: !this.state.activeFilter });
 					}}
 				>
-					<Text>
-						{/* {' ' + category.name.toUpperCase() + category.name.slice(1)} */}
-						{category.name}
-					</Text>
+					<Text>{category.name}</Text>
 				</Button>
 			);
 		});
 	}
 
-	filterTasks() {
+	filterTasksByCategory() {
 		return this.props.tasks.filter(task => {
 			if (!task.done) {
 				if (this.props.filter === 'all') {
@@ -122,6 +123,54 @@ class ToDoScreen extends Component {
 			}
 			return false;
 		});
+	}
+
+	filterTasksByDays(tasks) {
+		const diffrentDays = [
+			{ name: 'Overdue', from: -999, to: -1 },
+			{ name: 'Today', from: 0, to: 0 },
+			{ name: 'Tomorrow', from: 1, to: 1 },
+			{ name: 'This week', from: 2, to: 7 },
+			{ name: 'Next week', from: 8, to: 14 },
+			{ name: 'Rest upcoming events', from: 15, to: 999 }
+		];
+		const actualYear = new Date().toString().slice(11, 16);
+		const todayStr = new Date().toString().slice(0, 16);
+		const today = moment(todayStr);
+
+		return diffrentDays.map((timeDay, key) => {
+			const newTaskSet = [...tasks];
+			const filteredTasks = newTaskSet.filter(task => {
+				const taskDate = task.until + ' ' + actualYear;
+				daysDiff = moment.duration(moment(taskDate).diff(today)).asDays();
+				return daysDiff >= timeDay.from && daysDiff <= timeDay.to
+					? true
+					: false;
+			});
+			if (filteredTasks.length > 0) {
+				return (
+					<View
+						style={{ marginTop: 5, marginLeft: 20, marginRight: 20 }}
+						key={key}
+					>
+						<Text
+							style={{
+								marginBottom: 5,
+								color: timeDay.name === 'Overdue' ? '#e43' : '#0275D8'
+							}}
+						>
+							{timeDay.name}
+						</Text>
+						<TaskList tasks={filteredTasks} />
+					</View>
+				);
+			}
+		});
+	}
+
+	renderTasks() {
+		const filteredTasksByCategory = this.filterTasksByCategory();
+		return this.filterTasksByDays(filteredTasksByCategory);
 	}
 
 	render() {
@@ -191,9 +240,7 @@ class ToDoScreen extends Component {
 				) : (
 					<View style={{ position: 'absolute', width: 1, height: 1 }} />
 				)}
-
-				<TaskList tasks={this.filterTasks()} />
-
+				<Content style={{ paddingBottom: 500 }}>{this.renderTasks()}</Content>
 				{this.renderFab()}
 			</Container>
 		);

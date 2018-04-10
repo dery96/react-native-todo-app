@@ -54,7 +54,7 @@ class Task extends Component {
 
 const styles = StyleSheet.create({
 	taskMargin: {
-		marginBottom: 10
+		marginBottom: 5
 	},
 	taskName: {
 		fontSize: 18
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-// Task.propTypes = {
-// 	name: PropTypes.string.isRequired
-// };
+Task.propTypes = {
+	name: PropTypes.string.isRequired
+};
 export default connect(null)(Task);

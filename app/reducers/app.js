@@ -11,37 +11,59 @@ const initialState = Map({
 	tasks: [
 		{
 			name: 'First task from redux state',
-			until: 'Who knows',
+			until: 'Tue Apr 6',
 			since: undefined,
 			category: { name: 'No category', color: '#F0AD4E' },
+			done: false
+		},
+		{
+			name: 'React project',
+			until: 'Tue Apr 10',
+			since: undefined,
+			category: { name: 'Work', color: '#e43' },
 			done: false
 		},
 		{
 			name: 'Clean the carpet',
 			until: 'Thr Apr 12',
 			since: undefined,
-			category: { name: 'Home', color: '#292B2C' },
-			done: false
-		},
-		{
-			name: 'React project',
-			until: 'Who knows',
-			since: undefined,
-			category: { name: 'Work', color: '#e43' },
+			category: { name: 'Home', color: '#0275D8' },
 			done: false
 		},
 		{
 			name: 'Visit Sara',
 			until: 'Sat Apr 14',
 			since: undefined,
-			category: { name: 'Home', color: '#292B2C' },
+			category: { name: 'Home', color: '#0275D8' },
+			done: false
+		},
+		{
+			name: 'Unity Project',
+			until: 'Fri Apr 21',
+			since: undefined,
+			category: { name: 'University', color: '#5BC0DE' },
+			done: false
+		},
+		{
+			name: 'Unity Project',
+			until: 'Fri Apr 21',
+			since: undefined,
+			category: { name: 'University', color: '#5BC0DE' },
+			done: false
+		},
+		{
+			name: 'Unity Project',
+			until: 'Fri Apr 21',
+			since: undefined,
+			category: { name: 'University', color: '#5BC0DE' },
 			done: false
 		}
 	],
 	categoryList: [
 		{ name: 'Work', color: '#e43' },
-		{ name: 'Home', color: '#292B2C' },
-		{ name: 'No category', color: '#F0AD4E' }
+		{ name: 'Home', color: '#0275D8' },
+		{ name: 'No category', color: '#F0AD4E' },
+		{ name: 'University ', color: '#5BC0DE' }
 	],
 	colors: ['#e43', '#292B2C', '#F0AD4E', '#5BC0DE', '#5CB85C', '#0275D8'],
 	filter: 'all'

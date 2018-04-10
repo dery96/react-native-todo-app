@@ -13,22 +13,21 @@ class TaskList extends Component {
 	renderTasks() {
 		return this.props.tasks.map((task, index) => {
 			return (
-				<View key={index}>
-					<Task
-						name={task.name}
-						category={task.category}
-						done={task.done}
-						until={task.until}
-						since={task.since}
-					/>
-				</View>
+				<Task
+					name={task.name}
+					category={task.category}
+					done={task.done}
+					until={task.until}
+					since={task.since}
+					key={index}
+				/>
 			);
 		});
 	}
 
 	render() {
 		return (
-			<Container style={{ padding: 21, paddingBottom: 100, flex: 20 }}>
+			<View style={{}}>
 				{this.props.tasks.length === 0 ? (
 					<View style={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
 						<Text style={{ color: 'grey', textAlign: 'center' }}>
@@ -36,9 +35,9 @@ class TaskList extends Component {
 						</Text>
 					</View>
 				) : (
-					<Content style={{ height: '100%' }}>{this.renderTasks()}</Content>
+					<View>{this.renderTasks()}</View>
 				)}
-			</Container>
+			</View>
 		);
 	}
 }

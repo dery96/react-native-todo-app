@@ -28,6 +28,7 @@
 		"axios": "^0.18.0",
 		"expo": "^25.0.0",
 		"immutable": "^3.8.2",
+		"moment": "^2.22.0",
 		"native-base": "^2.4.1",
 		"prop-types": "^15.6.1",
 		"react": "16.2.0",
