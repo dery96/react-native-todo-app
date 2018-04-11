@@ -24,17 +24,29 @@ class Task extends Component {
 		return (
 			<Card style={styles.taskMargin}>
 				<CardItem style={this.props.done ? styles.doneTask : {}}>
-					<CheckBox
-						style={styles.checkBox}
-						checked={this.props.done}
-						color={'black'}
-						onPress={() => this.changeTaskStatus()}
-					>
-						<Icon name="pause" style={styles.buttonsText} />
-					</CheckBox>
+					{this.props.done ? (
+						<Icon
+							name="ios-checkbox"
+							style={[
+								{
+									fontSize: 27,
+									width: 25,
+									paddingLeft: 3,
+									margin: 0
+								}
+							]}
+						/>
+					) : (
+						<CheckBox
+							style={styles.checkBox}
+							checked={this.props.done}
+							color={'black'}
+							onPress={() => this.changeTaskStatus()}
+						/>
+					)}
 					<Body
 						style={{
-							paddingLeft: 30
+							paddingLeft: this.props.done ? 10 : 30
 						}}
 					>
 						<Text style={styles.taskName}>{this.props.name}</Text>
@@ -65,7 +77,7 @@ class Task extends Component {
 
 const styles = StyleSheet.create({
 	doneTask: {
-		opacity: 0.4
+		opacity: 0.8
 	},
 	taskMargin: {
 		marginBottom: 5
@@ -107,6 +119,11 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		left: 18,
 		padding: 10
+	},
+	checkBoxTick: {
+		position: 'relative',
+		left: -8,
+		top: -8
 	}
 });
 
