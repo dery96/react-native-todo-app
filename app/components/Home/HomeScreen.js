@@ -17,7 +17,9 @@ import {
 	Icon,
 	Text,
 	Fab,
-	Picker
+	Picker,
+	Item,
+	Input
 } from 'native-base';
 
 import { changeFilterAction } from '../../actions';
@@ -32,12 +34,15 @@ class ToDoScreen extends Component {
 		super(props);
 		this.state = {
 			activeFilter: false,
-			activeMenu: false
+			activeMenu: false,
+			activeSearch: false,
+			searchText: ''
 		};
 
 		this.filterOptions = this.filterOptions.bind(this);
 		this.filterTasksByCategory = this.filterTasksByCategory.bind(this);
 		this.filterTasksByDays = this.filterTasksByDays.bind(this);
+		this.filterTasksBySearch = this.filterTasksBySearch.bind(this);
 		this.renderTasks = this.renderTasks.bind(this);
 		this.renderMenu = this.renderMenu.bind(this);
 		this.renderFab = this.renderFab.bind(this);
@@ -177,8 +182,25 @@ class ToDoScreen extends Component {
 		});
 	}
 
+	filterTasksBySearch(tasks) {
+		if (this.state.searchText !== '') {
+			return tasks.filter(task => {
+				return task.name
+					.toString()
+					.toLowerCase()
+					.includes(this.state.searchText.toString().toLowerCase());
+			});
+		}
+		return tasks;
+	}
+
 	renderTasks() {
 		const filteredTasksByCategory = this.filterTasksByCategory();
+		if (this.state.activeSearch) {
+			return this.filterTasksByDays(
+				this.filterTasksBySearch(filteredTasksByCategory)
+			);
+		}
 		return this.filterTasksByDays(filteredTasksByCategory);
 	}
 
@@ -212,22 +234,55 @@ class ToDoScreen extends Component {
 							</Title>
 						</Button>
 					</Left>
-					<Right>
-						<Button transparent>
-							<Icon name="search" />
-						</Button>
-						<Button
-							transparent
-							onPress={() =>
-								this.setState({
-									activeFilter: false,
-									activeMenu: !this.state.activeMenu
-								})
-							}
-						>
-							<Icon name="apps" />
-						</Button>
-					</Right>
+
+					{this.state.activeSearch ? (
+						<Item style={{ width: '100%' }}>
+							<Icon name="md-search" style={{ color: 'white' }} />
+							<Input
+								placeholder="Search"
+								style={{ color: 'white', paddingBottom: 0, marginBottom: 0 }}
+								placeholderTextColor={'white'}
+								onChangeText={searchText => this.setState({ searchText })}
+								value={this.state.searchText}
+							/>
+							<Icon
+								name="md-close"
+								style={{ color: 'white' }}
+								onPress={() =>
+									this.setState({
+										activeSearch: !this.state.activeSearch,
+										searchText: ''
+									})
+								}
+							/>
+						</Item>
+					) : (
+						<Right>
+							<Button
+								transparent
+								onPress={() =>
+									this.setState({
+										activeFilter: false,
+										activeMenu: false,
+										activeSearch: true
+									})
+								}
+							>
+								<Icon name="search" />
+							</Button>
+							<Button
+								transparent
+								onPress={() =>
+									this.setState({
+										activeFilter: false,
+										activeMenu: !this.state.activeMenu
+									})
+								}
+							>
+								<Icon name="apps" />
+							</Button>
+						</Right>
+					)}
 				</Header>
 
 				{this.state.activeFilter ? (
