@@ -14,7 +14,7 @@ export default {
 		headerTitle: 'New Category',
 		enter_category: 'Enter category name',
 		your_task_list: 'Your task category:',
-		btn: 'Create new category'
+		btn: 'New category'
 	},
 	pomodoro: {
 		title: 'Pomodoro Timer',

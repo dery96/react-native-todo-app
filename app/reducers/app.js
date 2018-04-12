@@ -49,7 +49,7 @@ const initialState = Map({
 		{ name: 'Work', color: '#e43' },
 		{ name: 'Home', color: '#0275D8' },
 		{ name: 'No category', color: '#F0AD4E' },
-		{ name: 'University ', color: '#5BC0DE' }
+		{ name: 'University', color: '#5BC0DE' }
 	],
 	colors: ['#e43', '#292B2C', '#F0AD4E', '#5BC0DE', '#5CB85C', '#0275D8'],
 	filter: 'all'

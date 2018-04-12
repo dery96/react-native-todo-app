@@ -180,8 +180,17 @@ class NewTaskScreen extends Component {
 							<Text style={styles.labels}>
 								{I18n.t('new_task.add_to_list')}
 							</Text>
-							<Form>
+							<Form
+								style={{
+									display: 'flex',
+									flexDirection: 'row',
+									alignContent: 'center',
+									alignItems: 'center',
+									justifyContent: 'space-between'
+								}}
+							>
 								<Picker
+									style={{ width: 270, marginRight: 0 }}
 									mode="dropdown"
 									placeholder="Select One"
 									selectedValue={this.state.selectedValue}
@@ -200,22 +209,18 @@ class NewTaskScreen extends Component {
 								>
 									{this.categoryListPickerItems(this.props.categoryList)}
 								</Picker>
-								<View
+								<Icon
+									name="md-options"
 									style={{
-										alignSelf: 'center',
-										marginTop: 10
+										marginRight: 15,
+										width: 27,
+										fontSize: 27
 									}}
-								>
-									<Button
-										rounded
-										small
-										onPress={() =>
-											this.props.navigation.navigate('NewCategory')
-										}
-									>
+									onPress={() => this.props.navigation.navigate('NewCategory')}
+								/>
+								{/* <Button rounded small>
 										<Text>{I18n.t('new_task.new_list_btn')}</Text>
-									</Button>
-								</View>
+									</Button> */}
 							</Form>
 						</Content>
 					</Container>
