@@ -98,6 +98,7 @@ const actionsMap = {
 	},
 
 	[CHANGE_TASK_STATUS]: (state, action) => {
+		const copyTasks = [...state.get('tasks')];
 		const findSpecific = (name, tasks) => {
 			tasks.map(task => {
 				if (task.name === name) {
@@ -106,7 +107,7 @@ const actionsMap = {
 			});
 			return tasks;
 		};
-		const newtasks = findSpecific(action.data.name, state.get('tasks'));
+		const newtasks = findSpecific(action.data.name, copyTasks);
 		const tasks = [...newtasks];
 		return state.merge(
 			Map({
