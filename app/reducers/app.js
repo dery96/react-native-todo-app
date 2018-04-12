@@ -43,13 +43,6 @@ const initialState = Map({
 			since: undefined,
 			category: { name: 'University', color: '#5BC0DE' },
 			done: false
-		},
-		{
-			name: 'Unity Project',
-			until: 'Fri Apr 21',
-			since: undefined,
-			category: { name: 'University', color: '#5BC0DE' },
-			done: true
 		}
 	],
 	categoryList: [
@@ -108,7 +101,8 @@ const actionsMap = {
 			});
 			return tasks;
 		};
-		const tasks = findSpecific(action.data.name, state.get('tasks'));
+		const newtasks = findSpecific(action.data.name, state.get('tasks'));
+		const tasks = [...newtasks];
 		return state.merge(
 			Map({
 				tasks
