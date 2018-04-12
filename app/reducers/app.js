@@ -14,6 +14,7 @@ const initialState = Map({
 			until: 'Tue Apr 6',
 			since: undefined,
 			category: { name: 'No category', color: '#F0AD4E' },
+			pomodoroTimes: 0,
 			done: false
 		},
 		{
@@ -21,6 +22,7 @@ const initialState = Map({
 			until: 'Tue Apr 10',
 			since: undefined,
 			category: { name: 'Work', color: '#e43' },
+			pomodoroTimes: 0,
 			done: false
 		},
 		{
@@ -28,6 +30,7 @@ const initialState = Map({
 			until: 'Thr Apr 12',
 			since: undefined,
 			category: { name: 'Home', color: '#0275D8' },
+			pomodoroTimes: 0,
 			done: false
 		},
 		{
@@ -35,6 +38,7 @@ const initialState = Map({
 			until: 'Sat Apr 14',
 			since: undefined,
 			category: { name: 'Home', color: '#0275D8' },
+			pomodoroTimes: 0,
 			done: false
 		},
 		{
@@ -42,6 +46,7 @@ const initialState = Map({
 			until: 'Fri Apr 21',
 			since: undefined,
 			category: { name: 'University', color: '#5BC0DE' },
+			pomodoroTimes: 0,
 			done: false
 		}
 	],

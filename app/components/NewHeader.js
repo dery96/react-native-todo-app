@@ -37,6 +37,7 @@ class NewHeader extends Component {
 						since: this.props.dateSince,
 						until: this.props.dateUntil,
 						category: this.props.category,
+						pomodoroTimes: 0,
 						done: false
 					})
 				);

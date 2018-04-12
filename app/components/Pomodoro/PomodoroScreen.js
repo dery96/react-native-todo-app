@@ -27,12 +27,20 @@ class PomodoroScreen extends Component {
 		this.state = {
 			timeDuration: 3120,
 			selectedTask: '',
-			timer: undefined
+			timer: undefined,
+			selectedTask: undefined
 		};
 
 		this.startTime = this.startTime.bind(this);
 		this.stopTime = this.stopTime.bind(this);
 		this.reduceTime = this.reduceTime.bind(this);
+		this.tasksListPickerItems = this.tasksListPickerItems.bind(this);
+	}
+
+	tasksListPickerItems() {
+		return this.props.tasks.map((task, index) => {
+			return <Picker.Item label={task.name} value={task} key={index} />;
+		});
 	}
 
 	startTime() {
@@ -84,7 +92,60 @@ class PomodoroScreen extends Component {
 					title={I18n.t('pomodoro.title')}
 					noTick
 				/>
-
+				<View style={styles.taskInformationPicker}>
+					<Text
+						style={[
+							styles.taskInformationText,
+							{ fontWeight: '600', marginTop: 20 }
+						]}
+					>
+						Pick task to work on!
+					</Text>
+					<Picker
+						style={{}}
+						mode="dropdown"
+						placeholder="Select One"
+						selectedValue={this.state.selectedTask}
+						onValueChange={selectedTask => {
+							this.setState({
+								selectedTask: selectedTask
+							});
+						}}
+					>
+						{this.tasksListPickerItems()}
+					</Picker>
+					{this.state.selectedTask ? (
+						<View style={styles.taskInformation}>
+							<View style={styles.taskInformationItem}>
+								<Text style={styles.taskInformationText}>Name:</Text>
+								<Text style={styles.taskInformationText}>
+									{this.state.selectedTask.name}
+								</Text>
+							</View>
+							<View style={styles.taskInformationItem}>
+								<Text style={styles.taskInformationText}>Category:</Text>
+								<Text
+									style={[
+										{ color: this.state.selectedTask.category.color },
+										styles.taskInformationText
+									]}
+								>
+									{this.state.selectedTask.category.name}
+								</Text>
+							</View>
+							<View style={styles.taskInformationItem}>
+								<Text style={styles.taskInformationText}>
+									Pomodoro Sessions:
+								</Text>
+								<Text style={styles.taskInformationText}>
+									{this.state.selectedTask.pomodoroTimes}
+								</Text>
+							</View>
+						</View>
+					) : (
+						<View style={{ position: 'absolute', width: 1, height: 1 }} />
+					)}
+				</View>
 				<Container style={styles.timerContainer}>
 					<Text
 						style={{
@@ -148,6 +209,17 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		marginRight: 5
+	},
+	taskInformationPicker: { marginLeft: 15, marginRight: 15 },
+	taskInformation: {},
+	taskInformationText: {
+		fontSize: 19
+	},
+	taskInformationItem: {
+		marginTop: 5,
+		display: 'flex',
+		justifyContent: 'space-between',
+		flexDirection: 'row'
 	}
 });
 
