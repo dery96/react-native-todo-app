@@ -33,7 +33,7 @@ class NewTaskScreen extends Component {
 			dateSince: undefined,
 			dateUntil: undefined,
 			calendar: false,
-			category: ['Work', '#e46'],
+			category: { name: 'Work', color: '#e43' },
 			selectedDate: '',
 			selectedValue: 'Work'
 		};
@@ -191,6 +191,7 @@ class NewTaskScreen extends Component {
 												return selectedValue === category.name ? true : false;
 											}
 										);
+										console.log(newCategory);
 										this.setState({
 											selectedValue: selectedValue,
 											category: newCategory[0]

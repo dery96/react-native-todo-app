@@ -36,7 +36,8 @@ class NewHeader extends Component {
 						name: this.props.taskName,
 						since: this.props.dateSince,
 						until: this.props.dateUntil,
-						category: this.props.category
+						category: this.props.category,
+						done: false
 					})
 				);
 				this.props.navigation.goBack();

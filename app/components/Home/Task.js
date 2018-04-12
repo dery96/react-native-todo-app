@@ -35,6 +35,7 @@ class Task extends Component {
 									margin: 0
 								}
 							]}
+							onPress={() => this.changeTaskStatus()}
 						/>
 					) : (
 						<CheckBox
